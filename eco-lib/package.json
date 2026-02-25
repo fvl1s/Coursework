@@ -1,0 +1,11 @@
+{
+  "name": "eco-lib",
+  "version": "1.0.0",
+  "description": "генератори та ітератори для датчиків",
+  "main": "index.js",
+  "scripts": {
+  },
+  "keywords": ["generator", "iterator"],
+  "author": "HOLUBKOV VADYM IM-54",
+  "license": "MIT"
+}
