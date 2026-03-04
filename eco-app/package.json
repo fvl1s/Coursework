@@ -1,0 +1,14 @@
+{
+  "name": "eco-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "author": "HOLUBKOV VADYM IM-54",
+  "license": "MIT",
+  "dependencies": {
+    "eco-lib": "file:../eco-lib"
+  }
+}
