@@ -1,11 +1,15 @@
-function memoize(fn) {
+function memoize(fn, limit = 5) {
   const cache = new Map();
   return function(...args) {
     const key = JSON.stringify(args);
     if (cache.has(key)) return cache.get(key);
+    
+    if (cache.size >= limit) cache.clear();
+    
     const result = fn(...args);
     cache.set(key, result);
     return result;
   };
 }
+
 module.exports = { memoize };
