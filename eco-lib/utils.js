@@ -1,11 +1,12 @@
-function memoize(fn, limit = 5) {
+function memoize(fn, config = {}) {
+  const { limit = 5, ttl = 5000 } = config;
   const cache = new Map();
   return function(...args) {
     const key = JSON.stringify(args);
     const now = Date.now();
     if (cache.has(key)) {
       const entry = cache.get(key);
-      if (now - entry.time < 5) {
+      if (now - entry.time < ttl) {
         cache.delete(key);
         cache.set(key, entry);
         return entry.val;
