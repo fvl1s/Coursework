@@ -2,19 +2,20 @@ function memoize(fn, limit = 5) {
   const cache = new Map();
   return function(...args) {
     const key = JSON.stringify(args);
+    const now = Date.now();
     if (cache.has(key)) {
-      const val = cache.get(key);
+      const entry = cache.get(key);
+      if (now - entry.time < 5) {
+        cache.delete(key);
+        cache.set(key, entry);
+        return entry.val;
+      }
       cache.delete(key);
-      cache.set(key, val);
-      return val;
     }
-    
-    if (cache.size >= limit) cache.delete(cache.keys().next().value);
-    
     const result = fn(...args);
-    cache.set(key, result);
+    if (cache.size >= limit) cache.delete(cache.keys().next().value);
+    cache.set(key, { val: result, time: now });
     return result;
   };
 }
-
 module.exports = { memoize };
