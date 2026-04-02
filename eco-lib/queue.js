@@ -18,5 +18,12 @@ class SensorQueue {
     }
     return max;
   }
+
+  dequeueHighest() {
+    const item = this.peekHighest();
+    this.items.pop();
+    return item;
+  }
+
 }
 module.exports = { SensorQueue };
