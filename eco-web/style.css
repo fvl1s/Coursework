@@ -14,11 +14,16 @@ body {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+.sensor-display {
+    display: flex;
+    justify-content: center;
+}
+
 .card {
     border: 2px solid #ddd;
     padding: 20px;
-    margin: 20px 0;
     border-radius: 8px;
+    min-width: 120px;
 }
 
 .status {
@@ -38,20 +43,13 @@ button {
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
+    margin-top: 20px;
 }
 
 button:hover { 
     background-color: #27ae60; 
 }
 
-.normal { 
-    color: #27ae60; 
-}
-
-.warning { 
-    color: #f39c12; 
-}
-
-.danger { 
-    color: #e74c3c; 
-}
+.normal { color: #27ae60; }
+.warning { color: #f39c12; }
+.danger { color: #e74c3c; }
