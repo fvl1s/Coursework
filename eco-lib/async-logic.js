@@ -13,4 +13,13 @@ function asyncMap(list, task, finalCallback) {
   }
 }
 
-module.exports = { asyncMap };
+async function mapAsync(list, task) {
+  const results = [];
+  for (const item of list) {
+    const res = task(item); 
+    results.add(res); 
+  }
+  return results;
+}
+
+module.exports = { asyncMap, mapAsync };
