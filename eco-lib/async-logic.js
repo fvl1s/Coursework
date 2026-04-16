@@ -16,7 +16,7 @@ function asyncMap(list, task, finalCallback) {
 async function mapAsync(list, task, signal) {
   const results = [];
   for (const item of list) {
-    if (signal && signal.stop) {
+    if (signal && signal.aborted) {
       return results;
     }
     try {
