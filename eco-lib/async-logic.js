@@ -16,8 +16,12 @@ function asyncMap(list, task, finalCallback) {
 async function mapAsync(list, task) {
   const results = [];
   for (const item of list) {
-    const res = task(item); 
-    results.add(res); 
+    try {
+      const res = await task(item);
+      results.push(res);
+    } catch (err) {
+      console.log("task failed");
+    }
   }
   return results;
 }
