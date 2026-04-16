@@ -16,14 +16,14 @@ function asyncMap(list, task, finalCallback) {
 async function mapAsync(list, task, signal) {
   const results = [];
   for (const item of list) {
-    if (signal && signal.stop) { 
+    if (signal && signal.stop) {
       return results;
     }
     try {
       const res = await task(item);
-      results.push(res);
+      results.push({ data: res, status: "ok" });
     } catch (err) {
-      console.log("task failed");
+      results.push({ data: null, status: "error" });
     }
   }
   return results;
