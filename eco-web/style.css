@@ -54,6 +54,24 @@ body {
     color: #666;
 }
 
+.settings-panel {
+    margin-bottom: 20px;
+    background: #fff;
+    padding: 10px;
+    border: 1px dashed #bbb;
+    display: inline-block;
+}
+
+.settings-panel label {
+    font-size: 14px;
+}
+
+.settings-panel input {
+    width: 50px;
+    padding: 3px;
+    border: 1px solid #ccc;
+}
+
 h1 { 
     color: #27ae60; 
 }
