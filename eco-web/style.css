@@ -33,6 +33,25 @@ body {
     padding: 5px;
 }
 
+.log-section {
+    margin-top: 40px;
+    text-align: left;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+#log-list {
+    list-style: none;
+    height: 100px;
+    overflow-y: scroll;
+    background: #eee;
+}
+
+#log-list li {
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+}
+
 h1 { 
     color: #27ae60; 
 }
