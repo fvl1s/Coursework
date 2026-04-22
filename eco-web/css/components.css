@@ -1,10 +1,11 @@
 .card {
-    width: 250px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 20px;
+    width: 220px;
+    border: none;
+    border-radius: 12px;
+    padding: 30px;
     text-align: center;
-    background-color: #fafafa;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
 .status {

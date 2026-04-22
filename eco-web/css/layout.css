@@ -14,11 +14,12 @@
 }
 
 .content-area {
-    padding: 30px;
+    padding: 50px 30px;
 }
 
 .sensor-grid {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 40px;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 50px;
 }
