@@ -1,0 +1,35 @@
+.content-area {
+    padding: 40px;
+}
+
+.sensor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background-color: #1e1e1e;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #333;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.card:hover {
+    border-color: #2ecc71;
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    font-size: 14px;
+    color: #888;
+    text-transform: uppercase;
+}
+
+.card p {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 15px 0;
+}
