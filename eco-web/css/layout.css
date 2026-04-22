@@ -1,0 +1,24 @@
+.main-wrapper {
+    width: 900px;
+    margin: 0 auto;
+    background-color: white;
+    min-height: 100vh;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.top-header {
+    background-color: #27ae60;
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+.content-area {
+    padding: 30px;
+}
+
+.sensor-grid {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
