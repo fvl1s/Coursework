@@ -2,46 +2,39 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>MyEco Monitor</title>
+    <title>MyEco Dashboard</title>
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
-    <div class="main-wrapper">
-        <header class="top-header">
-            <h1>MyEco - Air Control</h1>
-        </header>
-
-        <main class="content-area">
-            <div class="sensor-grid">
-                <div class="card">
-                    <h3>CO2 Level</h3>
-                    <p id="co2-value">Loading...</p>
-                    <div id="co2-status" class="status">Waiting</div>
+    <div class="app-wrapper">
+        <aside class="sidebar">
+            <nav class="side-nav">
+                <div class="nav-item active">
+                    <i class="fas fa-th-large"></i> Dashboard
                 </div>
-                <div class="card">
-                    <h3>Temperature</h3>
-                    <p id="temp-value">Loading...</p>
-                    <div id="temp-status" class="status">Waiting</div>
+                <div class="nav-item">
+                    <i class="fas fa-microchip"></i> Sensors
                 </div>
-                <div class="card">
-                    <h3>Humidity</h3>
-                    <p id="hum-value">Loading...</p>
-                    <div id="hum-status" class="status">Waiting</div>
+                <div class="nav-item">
+                    <i class="fas fa-history"></i> History
                 </div>
-            </div>
+            </nav>
+        </aside>
 
-            <div class="actions">
-                <button id="update-btn">Update Data</button>
-            </div>
+        <main class="main-content">
+            <header class="top-header">
+                <h2>MyEco Control Panel</h2>
+                <div class="system-status">
+                    <span class="status-dot"></span>
+                    System: Online
+                </div>
+            </header>
 
-            <div class="history-log">
-                <h4>Activity Log</h4>
-                <ul id="log-list">
-                    <li>System initialized...</li>
-                </ul>
-            </div>
+            <div id="page-content" class="content-area">
+                </div>
         </main>
     </div>
     <script src="web-app.js"></script>
