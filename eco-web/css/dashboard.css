@@ -33,3 +33,12 @@
     font-weight: bold;
     margin: 15px 0;
 }
+
+.stats-placeholder {
+    margin-top: 50px;
+    text-align: center;
+    color: #666;
+    border: 2px dashed #333;
+    padding: 100px 20px;
+    border-radius: 15px;
+}
