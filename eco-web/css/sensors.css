@@ -1,9 +1,26 @@
 #sensors-page h2 {
-    color: #2ecc71;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    font-size: 20px;
 }
 
-#sensors-page p {
-    color: #888;
-    font-style: italic;
+#update-btn {
+    background-color: transparent;
+    color: #2ecc71;
+    border: 1px solid #2ecc71;
+    padding: 10px 25px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 40px;
+    transition: 0.3s;
+}
+
+#update-btn:hover {
+    background-color: #2ecc71;
+    color: #121212;
+}
+
+.status-indicator {
+    font-size: 12px;
+    color: #2ecc71;
+    margin-top: 10px;
 }
