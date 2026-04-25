@@ -4,13 +4,14 @@
 }
 
 #update-btn {
+    display: block;
+    margin: 40px auto 0;
     background-color: transparent;
     color: #2ecc71;
     border: 1px solid #2ecc71;
     padding: 10px 25px;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 40px;
     transition: 0.3s;
 }
 
