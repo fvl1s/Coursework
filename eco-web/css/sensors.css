@@ -1,0 +1,9 @@
+#sensors-page h2 {
+    color: #2ecc71;
+    margin-bottom: 20px;
+}
+
+#sensors-page p {
+    color: #888;
+    font-style: italic;
+}
