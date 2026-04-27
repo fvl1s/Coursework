@@ -25,3 +25,7 @@
     color: #2ecc71;
     margin-top: 10px;
 }
+
+.status-indicator.danger {
+    color: #e74c3c;
+}
