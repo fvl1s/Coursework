@@ -1,25 +1,16 @@
-const dashBtn = document.querySelector('.nav-item:nth-child(1)');
-const sensBtn = document.querySelector('.nav-item:nth-child(2)');
-const histBtn = document.querySelector('.nav-item:nth-child(3)');
+const navItems = document.querySelectorAll('.nav-item');
+const pages = document.querySelectorAll('.page-block');
 
-const dashPage = document.getElementById('dash-page');
-const sensPage = document.getElementById('sensors-page');
-const histPage = document.getElementById('history-page');
-
-function showPage(pageName) {
-    dashPage.style.display = 'none';
-    sensPage.style.display = 'none';
-    histPage.style.display = 'none';
-
-    if (pageName === 'dash') {
-        dashPage.style.display = 'block';
-    } else if (pageName === 'sens') {
-        sensPage.style.display = 'block';
-    } else if (pageName === 'hist') {
-        histPage.style.display = 'block';
+function showPage(pageId, activeBtn) {
+    for (let i = 0; i < pages.length; i++) {
+        pages[i].style.display = 'none';
+        navItems[i].classList.remove('active');
     }
+    
+    document.getElementById(pageId).style.display = 'block';
+    activeBtn.classList.add('active');
 }
 
-dashBtn.onclick = function() { showPage('dash'); };
-sensBtn.onclick = function() { showPage('sens'); };
-histBtn.onclick = function() { showPage('hist'); };
+navItems[0].onclick = function() { showPage('dash-page', navItems[0]); };
+navItems[1].onclick = function() { showPage('sensors-page', navItems[1]); };
+navItems[2].onclick = function() { showPage('history-page', navItems[2]); };
