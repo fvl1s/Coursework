@@ -34,11 +34,16 @@
     margin: 15px 0;
 }
 
+#dash-page h2 {
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+
 .stats-placeholder {
-    margin-top: 50px;
+    background-color: #1e1e1e;
+    border: 2px dashed #333;
+    padding: 80px 20px;
+    border-radius: 12px;
     text-align: center;
     color: #666;
-    border: 2px dashed #333;
-    padding: 100px 20px;
-    border-radius: 15px;
 }
