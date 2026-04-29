@@ -1,10 +1,11 @@
 {
   "name": "eco-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Command-line monitoring interface for MyEco System",
   "main": "main.js",
   "scripts": {
-    "start": "node main.js"
+    "start": "node main.js",
+    "dev": "node --watch main.js"
   },
   "author": "HOLUBKOV VADYM IM-54",
   "license": "MIT",
