@@ -20,6 +20,10 @@ const getStatus = EcoLib.memoize(function(val) {
     return 'Normal';
 });
 
+const alertQueue = new EcoLib.SensorQueue();
+const alertsContainer = document.getElementById('alerts-container');
+const noAlertsText = document.getElementById('no-alerts');
+
 const updateBtn = document.getElementById('update-btn');
 
 updateBtn.onclick = async function() {
@@ -38,6 +42,18 @@ updateBtn.onclick = async function() {
     
     if (co2Status === 'Danger') {
         indicator.className = 'status-indicator danger';
+        alertQueue.enqueue({ msg: 'Critical CO2 Level: ' + co2Val + ' ppm', time: new Date().toLocaleTimeString() }, 10);
+        
+        const topAlert = alertQueue.dequeueHighest();
+        if (topAlert) {
+            noAlertsText.style.display = 'none';
+            const alertMsg = document.createElement('p');
+            alertMsg.style.color = '#e74c3c';
+            alertMsg.style.fontSize = '0.9rem';
+            alertMsg.style.margin = '5px 0';
+            alertMsg.innerText = '⚠️ [' + topAlert.data.time + '] ' + topAlert.data.msg;
+            alertsContainer.prepend(alertMsg);
+        }
     } else if (co2Status === 'Warning') {
         indicator.className = 'status-indicator warning';
     } else {
