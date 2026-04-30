@@ -25,51 +25,60 @@ const alertsContainer = document.getElementById('alerts-container');
 const noAlertsText = document.getElementById('no-alerts');
 
 const updateBtn = document.getElementById('update-btn');
+const co2Display = document.getElementById('co2-value');
 
 updateBtn.onclick = async function() {
-    updateBtn.innerText = 'Loading...';
+    updateBtn.innerText = 'Scanning...';
+    updateBtn.disabled = true;
+
+    const sensorValues = EcoLib.getValues();
+    await EcoLib.limitTime(sensorValues, 2, function(val) {
+        co2Display.innerText = val + ' ppm';
+    });
+
     const sensorNames = ['CO2', 'Temperature', 'Humidity'];
     const results = await EcoLib.mapAsync(sensorNames, async function(name) {
-        await new Promise(r => setTimeout(r, 600));
+        await new Promise(r => setTimeout(r, 400));
         return Math.floor(Math.random() * 100);
     });
 
-    const co2Val = results[0].data;
-    const co2Status = getStatus(co2Val);
-    document.getElementById('co2-value').innerText = co2Val + ' ppm';
+    const finalValue = results[0].data;
+    const co2Status = getStatus(finalValue);
+    
+    co2Display.innerText = finalValue + ' ppm';
     const indicator = document.querySelector('.status-indicator');
     indicator.innerText = co2Status;
     
     if (co2Status === 'Danger') {
         indicator.className = 'status-indicator danger';
-        alertQueue.enqueue({ msg: 'Critical CO2 Level: ' + co2Val + ' ppm', time: new Date().toLocaleTimeString() }, 10);
+        alertQueue.enqueue({ msg: 'High CO2: ' + finalValue + ' ppm', time: new Date().toLocaleTimeString() }, 10);
         
-        const topAlert = alertQueue.dequeueHighest();
-        if (topAlert) {
+        const lastAlert = alertQueue.dequeueHighest();
+        if (lastAlert) {
             noAlertsText.style.display = 'none';
-            const alertMsg = document.createElement('p');
-            alertMsg.style.color = '#e74c3c';
-            alertMsg.style.fontSize = '0.9rem';
-            alertMsg.style.margin = '5px 0';
-            alertMsg.innerText = '⚠️ [' + topAlert.data.time + '] ' + topAlert.data.msg;
-            alertsContainer.prepend(alertMsg);
+            const p = document.createElement('p');
+            p.style.color = '#e74c3c';
+            p.innerText = '⚠️ [' + lastAlert.data.time + '] ' + lastAlert.data.msg;
+            alertsContainer.prepend(p);
         }
     } else if (co2Status === 'Warning') {
         indicator.className = 'status-indicator warning';
     } else {
         indicator.className = 'status-indicator';
     }
+
     updateBtn.innerText = 'Update Data';
+    updateBtn.disabled = false;
 };
 
 const historyList = document.querySelector('.history-list');
 
 async function startLiveHistory() {
-    const stream = EcoLib.createSensorStream('Live-Monitor', 5);
+    const stream = EcoLib.createSensorStream('System-Log', 4);
     await EcoLib.processStream(stream, function(data) {
         const li = document.createElement('li');
         li.innerText = '[' + data.time + '] ' + data.name + ': ' + data.val + ' ppm';
-        if (data.val > 80) {
+        if (data.val > 75) {
             li.style.color = '#e74c3c';
         }
         historyList.appendChild(li);
