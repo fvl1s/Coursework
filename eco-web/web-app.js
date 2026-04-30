@@ -24,9 +24,7 @@ const updateBtn = document.getElementById('update-btn');
 
 updateBtn.onclick = async function() {
     updateBtn.innerText = 'Loading...';
-    
     const sensorNames = ['CO2', 'Temperature', 'Humidity'];
-    
     const results = await EcoLib.mapAsync(sensorNames, async function(name) {
         await new Promise(r => setTimeout(r, 600));
         return Math.floor(Math.random() * 100);
@@ -34,9 +32,7 @@ updateBtn.onclick = async function() {
 
     const co2Val = results[0].data;
     const co2Status = getStatus(co2Val);
-
     document.getElementById('co2-value').innerText = co2Val + ' ppm';
-    
     const indicator = document.querySelector('.status-indicator');
     indicator.innerText = co2Status;
     
@@ -47,6 +43,23 @@ updateBtn.onclick = async function() {
     } else {
         indicator.className = 'status-indicator';
     }
-
     updateBtn.innerText = 'Update Data';
 };
+
+const historyList = document.querySelector('.history-list');
+
+async function startLiveHistory() {
+    const stream = EcoLib.createSensorStream('Live-Monitor', 5);
+    await EcoLib.processStream(stream, function(data) {
+        const li = document.createElement('li');
+        li.innerText = '[' + data.time + '] ' + data.name + ': ' + data.val + ' ppm';
+        if (data.val > 80) {
+            li.style.color = '#e74c3c';
+        }
+        historyList.appendChild(li);
+    });
+}
+
+navItems[2].addEventListener('click', function() {
+    startLiveHistory();
+}, { once: true });
