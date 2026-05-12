@@ -74,13 +74,19 @@ updateBtn.onclick = async function() {
 const historyList = document.querySelector('.history-list');
 
 async function startLiveHistory() {
-    const stream = EcoLib.createSensorStream('System-Log', 4);
-    await EcoLib.processStream(stream, function(data) {
+    const stream = EcoLib.createSensorStream('System-Log', 5);
+    await EcoLib.processStream(stream, function(err, data) {
         const li = document.createElement('li');
-        li.innerText = '[' + data.time + '] ' + data.name + ': ' + data.val + ' ppm';
-        if (data.val > 75) {
+        
+        if (err) {
+            li.innerText = '[System Error] ' + err.message;
             li.style.color = '#e74c3c';
+            li.style.fontWeight = 'bold';
+        } else {
+            li.innerText = '[' + data.time + '] ' + data.name + ': ' + data.val + ' ppm';
+            if (data.val > 75) li.style.color = '#e74c3c';
         }
+        
         historyList.appendChild(li);
     });
 }
