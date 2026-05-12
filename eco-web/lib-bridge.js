@@ -8,10 +8,14 @@ window.EcoLib = {
     limitTime: async function(iterator, seconds, callback) {
         const limit = seconds * 1000;
         const start = Date.now();
-        for (const val of iterator) {
-            if (Date.now() - start > limit) break;
-            callback(val);
-            await new Promise((res) => setTimeout(res, 500));
+        try {
+            for await (const val of iterator) {
+                if (Date.now() - start > limit) break;
+                callback(null, val); 
+                await new Promise((res) => setTimeout(res, 500));
+            }
+        } catch (err) {
+            callback(err, null);
         }
     },
 
@@ -69,19 +73,28 @@ window.EcoLib = {
         let count = 0;
         while (count < limit) {
             await new Promise(r => setTimeout(r, 1000));
+            
+            if (Math.random() > 0.8) {
+                throw new Error("Sensor " + sensorName + " connection failed");
+            }
+
             const value = Math.floor(Math.random() * 100) + 1;
             count++;
-            yield {
-                name: sensorName,
-                val: value,
-                time: new Date().toLocaleTimeString()
+            yield { 
+                name: sensorName, 
+                val: value, 
+                time: new Date().toLocaleTimeString() 
             };
         }
     },
 
     processStream: async function(stream, callback) {
-        for await (const data of stream) {
-            callback(data);
+        try {
+            for await (const data of stream) {
+                callback(null, data);
+            }
+        } catch (err) {
+            callback(err, null);
         }
     }
 };
