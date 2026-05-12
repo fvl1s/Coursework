@@ -16,7 +16,8 @@ async function start() {
     console.log("Monitoring started ...");
     
     const vals = getValues();
-    await limitTime(vals, 3, (val) => {
+    await limitTime(vals, 3, (err, val) => {
+        if (err) return console.error(err);
         const status = getStatus(val);
         console.log(`Received: ${val} ppm | Status: ${status}`);
     });
@@ -28,7 +29,8 @@ async function testStream() {
     console.log("Monitoring started ...");
     const stream = createSensorStream("CO2", 3);
     
-    await processStream(stream, (data) => {
+    await processStream(stream, (err, data) => {
+        if (err) return console.error("STREAM ERROR:", err.message);
         console.log(`[${data.time}] ${data.name}: ${data.val}`);
     });
     
