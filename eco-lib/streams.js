@@ -2,6 +2,10 @@ async function* createSensorStream(sensorName, limit) {
     let count = 0;
     while (count < limit) {
         await new Promise(r => setTimeout(r, 1000));
+        if (Math.random() > 0.85) {
+            throw new Error("Sensor " + sensorName + " connection failed");
+        }
+
         const value = Math.floor(Math.random() * 100) + 1;
         count++;
         yield {
@@ -13,8 +17,12 @@ async function* createSensorStream(sensorName, limit) {
 }
 
 async function processStream(stream, callback) {
-    for await (const data of stream) {
-        callback(data);
+    try {
+        for await (const data of stream) {
+            callback(null, data);
+        }
+    } catch (err) {
+        callback(err, null);
     }
 }
 
